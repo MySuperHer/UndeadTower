@@ -72,7 +72,7 @@ function prepare(){
     lv = Number(localStorage.getItem("LV"));
     localStorage.setItem("STR", String(str + lv));
     localStorage.setItem("DEF", String(def - lv));
-    localStorage.setItem("VIT", String(vit + lv));
+    localStorage.setItem("VIT", String(vit - 1));
     var content = '你感覺自己渾身充滿了能量。<br></br>';
     $('#house').after(content);
     byfight();
@@ -85,7 +85,7 @@ function resistance(){
     lv = Number(localStorage.getItem("LV"));
     localStorage.setItem("STR", String(str - lv));
     localStorage.setItem("DEF", String(def + 2 * lv));
-    localStorage.setItem("VIT", String(vit - 2 * lv));
+    localStorage.setItem("VIT", String(vit - 2));
     var content = '你穩穩地蹲了下來。<br></br>';
     $('#house').after(content);
     byfight();
@@ -130,13 +130,13 @@ function fight(x){
         critical = Math.random() * (100 + luk);
         if(critical > 100){
             if(x == 1){
-                mint = mint - 2;
+                mint = mint - 2 * lv;
                 var content = '你的攻擊爆擊了' + mon + '的頭部，';
             }else if(x == 2){
-                mstr = mstr - 2;
+                mstr = mstr - 2 * lv;
                 var content = '你的攻擊爆擊了' + mon + '的腹部，';
             }else{
-                mdef = mdef - 2;
+                mdef = mdef - 2 * lv;
                 var content = '你的攻擊爆擊了' + mon + '的腿部，';
             }
             harm = Math.round((str - mdef) * (100 + int) / 100);
@@ -146,13 +146,13 @@ function fight(x){
             }
         }else{
             if(x == 1){
-                mint = mint - 1;
+                mint = mint - lv;
                 var content = '你攻擊了' + mon + '的頭部，';
             }else if(x == 2){
-                mstr = mstr - 1;
+                mstr = mstr - lv;
                 var content = '你攻擊了' + mon + '的腹部，';
             }else{
-                mdef = mdef - 1;
+                mdef = mdef - lv;
                 var content = '你攻擊了' + mon + '的腿部，';
             }
             harm = str + Math.round(vit / 2) - mdef;
