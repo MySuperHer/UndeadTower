@@ -62,6 +62,7 @@ function monstercreate(){
     localStorage.setItem("MVIT", String(4 + 4 * lv));
     localStorage.setItem("MMP", "0");
     localStorage.setItem("MHP", String(20 + 10 * lv * lv));
+    localStorage.setItem("POSE", "1");
 }
 
 function prepare(){
@@ -124,8 +125,7 @@ function fight(x){
     lv = Number(localStorage.getItem("lv"));
     if(x == pose){
         harm = 0;
-        var content = '你的攻擊被' + mon + '抵擋了<br></br>';
-        changepose();
+        var content = '你的攻擊被' + mon + '抵擋了。<br></br>';
     }else{
         critical = Math.random() * (100 + luk);
         if(critical > 100){
@@ -190,6 +190,7 @@ function fight(x){
             byfight();
         }
     }
+    changepose();
     $('#house').after(content);
 }
 
