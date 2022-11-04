@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <title>Undead Tower</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div>
+                <p>戰士</p>
+                <p>擁有卓越的攻擊力和不凡的防禦力，具有強大的生存能力，適合入門玩家。</p>
+                <p>魔法師</p>
+                <p>高超的魔法天賦讓他們在戰場上無往不利，搭配其頂尖的智力，是高手玩家的選擇</p>
+                <p>盜賊</p>
+                <p>能夠使用些許的魔力，據說是精靈的後裔，適合挑戰自己的玩家</p>
+            </div>
+            <div>
+                <form>
+                    <label for = "testInput">
+                      <span>腳色名稱</span>
+                      <input type = "text" placeholder = "test" id = "testInput2" />
+                      <a href = "home.html" class = "submitBtn" onclick = "FsubmitBtn1()">戰士</a>
+                      <a href = "home.html" class = "submitBtn" onclick = "FsubmitBtn2()">魔法師</a>
+                      <a href = "home.html" class = "submitBtn" onclick = "FsubmitBtn3()">盜賊</a>
+                    </label>
+                </form>
+                <script>
+                    function FsubmitBtn1() {
+                        var submitValue = $('#testInput2').val().toString();
+                        localStorage.setItem("name", submitValue);
+                        localStorage.setItem("work", "戰士");
+                        localStorage.removeItem("again");
+                    }
+
+                    function FsubmitBtn2() {
+                        var submitValue = $('#testInput2').val().toString();
+                        localStorage.setItem("name", submitValue);
+                        localStorage.setItem("work", "魔法師");
+                        localStorage.removeItem("again");
+                    }
+
+                    function FsubmitBtn3() {
+                        var submitValue = $('#testInput2').val().toString();
+                        localStorage.setItem("name", submitValue);
+                        localStorage.setItem("work", "盜賊");
+                        localStorage.removeItem("again");
+                    }
+                </script> 
+            </div>
+        </div>
+    </body>
+</html>

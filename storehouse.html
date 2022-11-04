@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <title>Undead Tower</title>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src = "lvup.js"></script>
+        <script src = "housefight.js"></script>
+    </head>
+    <body>
+        <div>
+            <div>
+                <nav>
+                    <a href = "./home.html">房間</a>
+                    <a href = "./storehouse.html">倉庫</a>
+                    <a href = "./village.html">村莊</a>
+                    <a href = "./town.html">城鎮</a>
+                </nav>
+            </div>
+
+            <div>
+                <div>
+                    <div>
+                        <p>被怪物佔領的老舊倉庫</p>
+                        <p>我到底睡了多久</p>
+                    </div>
+                    <div>
+                        <button id = tre11 onClick = "call()" style = "display: block;">翻找</button>
+                        <button id = tre12 onClick = "prepare()" style = "display: none;">蓄力</button>
+                        <button id = tre13 onClick = "fight(1)" style = "display: none;">向上揮</button>
+                        <button id = tre14 onClick = "fight(2)" style = "display: none;">用力揮</button>
+                        <button id = tre15 onClick = "fight(3)" style = "display: none;">向下揮</button>
+                        <button id = tre16 onClick = "resistance()" style = "display: none;">防禦</button>
+                        <button id = tre17 onClick = "rest()" style = "display: none;">休息</button>
+                        <button id = tre18 onClick = "skill()" style = "display: none;">技能</button>
+                        <a id = tre111 href = "input.html" style = "display: none;">轉生</a>
+                    </div>
+                    <hr/>
+                    <div>
+                        <p id = "tre19" style = "display: none;"><script>
+                            MON = localStorage.getItem("monster");
+                            lv = localStorage.getItem("lv");
+                            document.write('等級' + String(lv) + '的' + MON);
+                        </script><p>
+                        <p>結果</p>
+                        <p id = "house"></p>
+                    </div>
+                    <div>
+                        <script>
+                            if(localStorage.getItem("monster") != null){
+                                tre11.style.display = 'none';
+                                tre12.style.display = 'block';
+                                tre13.style.display = 'block';
+                                tre14.style.display = 'block';
+                                tre15.style.display = 'block';
+                                tre16.style.display = 'block';
+                                tre17.style.display = 'block';
+                                tre19.style.display = 'block';
+                                if(localStorage.getItem("skill") != null){
+                                    tre18.style.display = 'block';
+                                }
+                            }else{
+                                tre11.style.display = 'block';
+                                tre12.style.display = 'none';
+                                tre13.style.display = 'none';
+                                tre14.style.display = 'none';
+                                tre15.style.display = 'none';
+                                tre16.style.display = 'none';
+                                tre17.style.display = 'none';
+                                tre18.style.display = 'none';
+                                tre19.style.display = 'none';
+                            }
+                            if(localStorage.getItem("again") == null){
+                                tre11.style.display = 'none';
+                                tre12.style.display = 'none';
+                                tre13.style.display = 'none';
+                                tre14.style.display = 'none';
+                                tre15.style.display = 'none';
+                                tre16.style.display = 'none';
+                                tre17.style.display = 'none';
+                                tre18.style.display = 'none';
+                                tre19.style.display = 'none';
+                                tre111.style.display = 'block';
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

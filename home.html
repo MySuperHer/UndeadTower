@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <title>Undead Tower</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="role.js"></script>
+    </head>
+    <body>
+        <div>
+            <div>
+                <nav>
+                    <a href = "./home.html">房間</a>
+                    <a href = "./storehouse.html">倉庫</a>
+                    <a href = "./village.html">村莊</a>
+                    <a href = "./town.html">城鎮</a>
+                </nav>
+            </div>
+
+            <div>
+                <div>
+                    <div>
+                        <p>玩家資訊</p>
+                        <p>平衡性補包上線中</p>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div>
+                    <div>
+                        <p><script>
+                            name = localStorage.getItem("name");
+                            document.write("姓名：" + name);
+                        </script></p>
+                    </div>
+                    <div>
+                        <p><script>
+                            document.write("職業：" + localStorage.getItem("work"));
+                        </script></p>
+                    </div>
+                </div>
+                    
+                <div>
+                    <div>
+                        <p><script>
+                            document.write("等級：" + localStorage.getItem("LV"));
+                        </script></p>
+                    </div>
+                    <div>
+                        <p><script>
+                            document.write("經驗：" + localStorage.getItem("exp") + '/' + localStorage.getItem("EXP"));
+                        </script></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <p><script>
+                            str = Number(localStorage.getItem("STR"));
+                            document.write("攻擊力：" + str);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            def = Number(localStorage.getItem("DEF"));
+                            document.write("防禦力：" + def);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            int = Number(localStorage.getItem("INT"));
+                            document.write("智力：" + int);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            luk = Number(localStorage.getItem("LUK"));
+                            document.write("幸運：" + luk);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            vit = Number(localStorage.getItem("VIT"));
+                            document.write("耐力：" + vit);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            mp = Number(localStorage.getItem("MP"));
+                            document.write("魔力：" + mp);
+                        </script><p>
+                    </div>
+                    <div>
+                        <p><script>
+                            hp = Number(localStorage.getItem("HP"));
+                            document.write("體質：" + hp);
+                        </script><p>
+                    </div>
+                </div>
+    
+                <hr/>
+                
+                <div>
+                    <div>
+                        <p><script>
+                            mon = Number(localStorage.getItem("money"));
+                            document.write("金錢 ：" + mon);
+                        </script><p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
