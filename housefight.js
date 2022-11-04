@@ -25,10 +25,10 @@ function getthing(){
     mon = Number(localStorage.getItem("money"));
     rand = Math.random() * 100 + 1;
     if(rand > 50){
-        var content = '獲得' + String(LV) + '經驗值';
+        var content = '獲得' + String(LV) + '經驗值<br></br>';
         localStorage.setItem("EXP", String(exp + lv));
     }else{
-        var content = '獲得' + String(LV) + '金錢';
+        var content = '獲得' + String(LV) + '金錢<br></br>';
         localStorage.setItem("money", String(mon + lv));
     }
     tre11.style.display = 'block';
