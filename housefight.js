@@ -301,6 +301,7 @@ function byfight(){
             tre18.style.display = 'none';
             tre19.style.display = 'none';
             tre111.style.display = 'block';
+            tre112.style.display = 'none';
         }
     }
     $('#house').after(content);
