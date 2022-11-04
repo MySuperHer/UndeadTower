@@ -10,6 +10,7 @@ function create(){
         }
         localStorage.setItem("place", "house");
         localStorage.removeItem("monster");
+        localStorage.removeItem("story");
         localStorage.setItem("again", "1");
     }
 }

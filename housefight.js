@@ -8,12 +8,30 @@ function call(){
         tre11.style.display = 'none';
         luk = Number(localStorage.getItem("LUK"));
         lv = Number(localStorage.getItem("LV"));
+        story = Number(localStorage.getItem("story"));
         thing = Math.random() * 5 * luk;
-        if(thing > 100){
+        if(thing > 200){
             getthing();
-        }else{
+        }else if(lv < 10 || thing > 100){
             localStorage.setItem("monster", "菜雞");
             localStorage.setItem("lv", String(Math.round(Math.random() * 3 + lv)));
+            monstercreate(1);
+            look();
+        }else if(lv >= 10 && thing > 70){
+            localStorage.setItem("monster", "狗頭人");
+            localStorage.setItem("lv", String(Math.round(Math.random() * 5 + lv)));
+            monstercreate(2);
+            look();
+        }else if(lv >= 20 && thing < 30 && story != 3){
+            localStorage.setItem("monster", "狗頭人之王伊爾凡格");
+            localStorage.setItem("lv", "40");
+            localStorage.setItem("story", "0");
+            bosscreate();
+            look();
+        }else{
+            localStorage.setItem("monster", "菜鳥");
+            localStorage.setItem("lv", String(Math.round(Math.random() * 5 + lv)));
+            monstercreate(3);
             look();
         }
     }
@@ -21,12 +39,12 @@ function call(){
 
 function getthing(){
     LV = Number(localStorage.getItem("LV"));
-    exp = Number(localStorage.getItem("EXP"));
+    exp = Number(localStorage.getItem("exp"));
     mon = Number(localStorage.getItem("money"));
     rand = Math.random() * 100 + 1;
     if(rand > 50){
         var content = '獲得' + String(LV) + '經驗值<br></br>';
-        localStorage.setItem("EXP", String(exp + lv));
+        localStorage.setItem("exp", String(exp + lv));
     }else{
         var content = '獲得' + String(LV) + '金錢<br></br>';
         localStorage.setItem("money", String(mon + lv));
@@ -38,7 +56,6 @@ function getthing(){
 function look(){
     lv = Number(localStorage.getItem("lv"));
     monster = localStorage.getItem("monster");
-    monstercreate();
     var content = '遭遇到等級' + String(lv) + '的' + monster + '<br></br>';
     $('#house').append(content);
     tre11.style.display = 'none';
@@ -53,18 +70,29 @@ function look(){
     }
 }
 
-function monstercreate(){
+function monstercreate(x){
     lv = Number(localStorage.getItem("lv"));
-    localStorage.setItem("MSTR", String(1 + 2 * lv));
-    localStorage.setItem("MDEF", String(2 + 3 * lv));
-    localStorage.setItem("MINT", String(2 + 2 * lv));
-    localStorage.setItem("MLUK", String(3 + 3 * lv));
-    localStorage.setItem("MVIT", String(4 + 4 * lv));
+    localStorage.setItem("MSTR", String(1 + 2 * lv * x));
+    localStorage.setItem("MDEF", String(2 + 3 * lv * x));
+    localStorage.setItem("MINT", String(2 + 2 * lv * x));
+    localStorage.setItem("MLUK", String(3 + 3 * lv * x));
+    localStorage.setItem("MVIT", String(4 + 4 * lv * x));
     localStorage.setItem("MMP", "0");
-    localStorage.setItem("MHP", String(20 + 10 * lv * lv));
+    localStorage.setItem("MHP", String(20 * x * x + 10 * lv * lv));
     localStorage.setItem("POSE", "1");
 }
 
+function bosscreate(){
+    lv = Number(localStorage.getItem("lv"));
+    localStorage.setItem("MSTR", String(100 * lv));
+    localStorage.setItem("MDEF", String(20 * lv));
+    localStorage.setItem("MINT", String(100 * lv));
+    localStorage.setItem("MLUK", String(20));
+    localStorage.setItem("MVIT", String(100));
+    localStorage.setItem("MMP", "0");
+    localStorage.setItem("MHP", String(100000));
+    localStorage.setItem("POSE", "1");
+}
 function prepare(){
     str = Number(localStorage.getItem("STR"));
     def = Number(localStorage.getItem("DEF"));
@@ -186,6 +214,7 @@ function fight(x){
             tre17.style.display = 'none';
             tre18.style.display = 'none';
             tre19.style.display = 'none';
+            tre112.style.display = 'none';
         }else{
             byfight();
         }
@@ -216,45 +245,82 @@ function byfight(){
     pose = Number(localStorage.getItem("POSE"));
     mon = localStorage.getItem("monster");
     lv = Number(localStorage.getItem("lv"));
-    critical = Math.random() * (100 + luk);
-    if(critical > 100){
-        var content = mon + '的攻擊爆擊了，';
-        harm = Math.round((mstr - def) * (100 + mint) / 100);
-        mvit -= 1;
-        if(harm <= 1){
-            harm = mvit;
-            mvit -= 2;
+    story = Number(localStorage.getItem("story"));
+    if(story == 0){
+        var content =  mon + '：愚蠢的凡人，跪下！<br></br>';
+        localStorage.setItem("story", "1");
+        tre112.style.display = 'block';
+    }else if(story == 1 && mhp < 50000){
+        var content =  mon + '：愚蠢的凡人，你已經展現出了你的勇氣，現在！臣服於我<br></br>';
+        localStorage.setItem("story", "2");
+        tre112.style.display = 'block';
+    }else if(story == 2){
+        hit = Math.round(Math.random() * 13 + 3);
+        var content =  mon + '取出了野太刀，使出了' + String(hit) + '連擊<br></br>';
+        localStorage.setItem("story", "3");
+        for (let i = 0; i < hit; i++) {
+            byfight();
         }
     }else{
-        var content =  mon + '攻擊了你，';
-        harm = mstr + Math.round(mvit / 2) - def;
-        mvit -= 1;
-        if(harm <= 1){
-            harm = Math.round(mvit / 2);
+        critical = Math.random() * (100 + luk);
+        if(critical > 100){
+            var content = mon + '的攻擊爆擊了，';
+            harm = Math.round((mstr - def) * (100 + mint) / 100);
             mvit -= 1;
+            if(harm <= 1){
+                harm = mvit;
+                mvit -= 2;
+            }
+        }else{
+            var content =  mon + '攻擊了你，';
+            harm = mstr + Math.round(mvit / 2) - def;
+            mvit -= 1;
+            if(harm <= 1){
+                harm = Math.round(mvit / 2);
+                mvit -= 1;
+            }
+        }
+        if(harm > 0){
+            hp -= harm;
+            content += '造成' + String(harm) + '點傷害。<br></br>';
+        }else{
+            content += '沒有造成傷害。<br></br>';
+        }
+        localStorage.setItem("MVIT", String(mvit));
+        localStorage.setItem("HP", String(hp));
+        if(hp <= 0){
+            content += '你被擊敗了，請轉生<br></br>';
+            localStorage.removeItem("again");
+            tre11.style.display = 'none';
+            tre12.style.display = 'none';
+            tre13.style.display = 'none';
+            tre14.style.display = 'none';
+            tre15.style.display = 'none';
+            tre16.style.display = 'none';
+            tre17.style.display = 'none';
+            tre18.style.display = 'none';
+            tre19.style.display = 'none';
+            tre111.style.display = 'block';
         }
     }
-    if(harm > 0){
-        hp -= harm;
-        content += '造成' + String(harm) + '點傷害。<br></br>';
-    }else{
-        content += '沒有造成傷害。<br></br>';
-    }
-    localStorage.setItem("MVIT", String(mvit));
-    localStorage.setItem("HP", String(hp));
-    if(hp <= 0){
-        content += '你被擊敗了，請轉生<br></br>';
-        localStorage.removeItem("again");
-        tre11.style.display = 'none';
-        tre12.style.display = 'none';
-        tre13.style.display = 'none';
-        tre14.style.display = 'none';
-        tre15.style.display = 'none';
-        tre16.style.display = 'none';
-        tre17.style.display = 'none';
-        tre18.style.display = 'none';
-        tre19.style.display = 'none';
-        tre111.style.display = 'block';
-    }
+    $('#house').after(content);
+}
+
+function kill(){
+    mon = localStorage.getItem("monster");
+    var content =  '你跪下了，' + mon + '把你的頭砍下來了<br></br>';
+    content += '你被擊敗了，請轉生<br></br>';
+    localStorage.removeItem("again");
+    tre11.style.display = 'none';
+    tre12.style.display = 'none';
+    tre13.style.display = 'none';
+    tre14.style.display = 'none';
+    tre15.style.display = 'none';
+    tre16.style.display = 'none';
+    tre17.style.display = 'none';
+    tre18.style.display = 'none';
+    tre19.style.display = 'none';
+    tre111.style.display = 'block';
+    tre112.style.display = 'none';
     $('#house').after(content);
 }
