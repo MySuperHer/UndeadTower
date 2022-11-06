@@ -38,7 +38,7 @@ function call(){
 }
 
 function getthing(){
-    LV = Number(localStorage.getItem("LV"));
+    lv = Number(localStorage.getItem("LV"));
     exp = Number(localStorage.getItem("exp"));
     mon = Number(localStorage.getItem("money"));
     rand = Math.random() * 100 + 1;
